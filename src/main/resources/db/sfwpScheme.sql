@@ -1,0 +1,1 @@
+create database kadai3_db;
