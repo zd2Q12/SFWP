@@ -5,4 +5,8 @@
 insert into users(username,email,password,created_at)
 values(#{username},#{email},#{password},Now())
 </insert>
+<select id="getUserByNameAndPass" resultType="Users">
+select user_id, username, email, password from users 
+where username = #{username} and password = #{password}
+</select>
 </mapper>
