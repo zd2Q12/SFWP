@@ -10,4 +10,6 @@ public interface UserService {
 	    //void editMember(Member member); 
 	    //void deleteMember(Integer id); 
 	    //List<MemberType> getTypeList() 
+
+			boolean isCollectNameAndPass(Users user);
 }
