@@ -11,6 +11,6 @@ public interface UserMapper {
     void insertUser(Users user);
     void updateUser(Users user);
     void deleteUser(Long userId);
-    Users getUserById(Long userId);
+    Users getUserByNameAndPass(Users user);
     List<Users> getAllUsers();
 }
