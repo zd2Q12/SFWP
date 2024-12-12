@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<h1>title</h1>
+		<th:errors="${errorMassage}"></th:errors>
+		<form action="" method="post" th:object="${user}">
+			<p><input type="text" th:field="*{username}" placeholder="ユーザー名"></p>
+			<p><input type="password" th:field="*{password}" placeholder="パスワード"></p>
+			<p><input type="submit" value="ログイン"></p>
+		</form>
+		
+		<h2>新規登録</h2>
+		<p><a th:href="@{/addUser}">新規登録がまだの方はこちら</a></p>
+	</div>
+
+</body>
+</html>
