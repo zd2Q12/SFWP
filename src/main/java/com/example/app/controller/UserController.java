@@ -19,6 +19,34 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
 	private final UserService userService;
+
+	@GetMapping("login")
+	public String login(Model model) {
+		model.addAttribute("user", new Users());
+		return "login";
+	}
+	@PostMapping("login")
+	public String loggedIn(
+			Users user,// フォームから送信されたユーザー情報
+			RedirectAttributes rd,
+			HttpSession session,
+			Model model) {
+		if(!userService.isCollectNameAndPass(user)) {
+			rd.addFlashAttribute("errorMassage", "ユーザー名またはパスワードが間違っています。");
+		  return "redirect:/login";
+		}
+			//ユーザー情報を行ごと取得
+			session.setAttribute("user", user);
+			System.out.println("user->" + user);
+		return "redirect:/logout";//home作るまで仮にlogotに飛ばす
+	}
+	
+	@GetMapping("logout")
+	public String logout(
+			HttpSession session) {
+		session.invalidate();
+		return "logout";
+	}
 	
 	//ユーザー追加フォームの表示
 	@GetMapping("addUser")
