@@ -12,19 +12,16 @@ import lombok.RequiredArgsConstructor;
 @Transactional(rollbackFor = Exception.class)
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
-	
+
 	private final UserMapper userMapper;
-	
+
 	@Override
 	public boolean isCollectNameAndPass(Users user) {//フォームから送信されたデータ
 		Users getUser = userMapper.getUserByNameAndPass(user);//DBから該当ユーザーの行取得
-		
+
 		//ユーザー名確認->正しくなければデータは渡されない
-		if(getUser == null) {
-			return false;
-		}
 		//ユーザー名・パスワードの確認・セット
-		if(!user.getUsername().equals(getUser.getUsername())|| !user.getPassword().equals(getUser.getPassword())) {
+		if((getUser == null) || !user.getUsername().equals(getUser.getUsername())|| !user.getPassword().equals(getUser.getPassword())) {
 			return false;
 		}
 		//ユーザー情報（id, email）をセット
@@ -32,7 +29,7 @@ public class UserServiceImpl implements UserService{
 		user.setEmail(getUser.getEmail());
 		return  true;//認証成功
 	}
-	
+
 	@Override
 	public void addUser(Users user) {
 		userMapper.insertUser(user);
